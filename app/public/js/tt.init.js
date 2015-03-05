@@ -89,15 +89,10 @@ TT.Init = (function () {
       name: 'In QA',
       active: false,
       filter: function (story) {
-        return story.current_state === 'finished' && !TT.Model.Story.hasTag(story, 'passedqa');
+        return TT.Model.Story.hasTag(story, 'inqa');
       },
       onDragIn: function (story) {
-        return {
-          current_state: 'finished',
-          labels: TT.Model.Story.addTag(story, 'inqa').labels,
-          owned_by: story.owned_by || TT.Utils.getUsername(),
-          estimate: story.estimate || '0'
-        };
+        return { labels: TT.Model.Story.addTag(story, 'inqa').labels };
       },
       onDragOut: function (story) {
         return { labels: TT.Model.Story.removeTag(story, 'inqa').labels };
@@ -108,15 +103,10 @@ TT.Init = (function () {
       name: 'Passed QA',
       active: false,
       filter: function (story) {
-        return story.current_state === 'finished' && TT.Model.Story.hasTag(story, 'passedqa');
+        return TT.Model.Story.hasTag(story, 'passedqa');
       },
       onDragIn: function (story) {
-        return {
-          current_state: 'finished',
-          labels: TT.Model.Story.addTag(story, 'passedqa').labels,
-          owned_by: story.owned_by || TT.Utils.getUsername(),
-          estimate: story.estimate || '0'
-        };
+        return { labels: TT.Model.Story.addTag(story, 'passedqa').labels };
       },
       onDragOut: function (story) {
         return { labels: TT.Model.Story.removeTag(story, 'passedqa').labels };
